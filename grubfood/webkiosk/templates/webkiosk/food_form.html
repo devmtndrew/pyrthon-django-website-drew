@@ -1,0 +1,19 @@
+{% extends 'webkiosk/base_template.html' %}
+
+{% block pagetitle %}GrubFood - New Food{% endblock %}
+
+{% block maincontent %}
+<h2>Add Food</h2>
+
+<form method ="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type ="submit" value ="Submit">
+</form>
+
+<ul>
+{% for message in messages %}
+<li>{{ message }}</li>
+{% endfor %}
+</ul>
+{% endblock %}
