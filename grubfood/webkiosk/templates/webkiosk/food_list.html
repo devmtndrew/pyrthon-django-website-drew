@@ -12,4 +12,7 @@
     {% endfor %}
     </ol>
 
+<span>Hello, {{request.user}}</span>
+<span><a href="{% url 'webkiosk:logout' %}">Logout</a></span>
+
 {% endblock %} 
