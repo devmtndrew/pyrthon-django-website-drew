@@ -1,0 +1,20 @@
+{%  extends 'webkiosk/main_home.html' %}
+{% block content %}
+{%  include 'webkiosk/status.html' %}
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Product (Name, Description, Price in PHP)</th>
+					<th>Quantity</th>
+					<th>Payment Mode</th>
+					<th>Date Ordered</th>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

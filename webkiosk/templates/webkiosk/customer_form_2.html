@@ -1,0 +1,21 @@
+{% extends 'webkiosk/base_template.html' %}
+
+{% block pagetitle %} GrubFood - Add or Update Customer {% endblock %}
+
+{% block maincontent %}
+<h2>Add Customer or Update</h2>
+
+<form method="post">
+    {% csrf_token %} <!-- auto secure by django, makes it more secure -->
+    {{ customerform.as_ul }} <!-- name of the key--> <!-- as.ul makes it an unorder list-->
+    <input type="submit" value="Submit">
+
+</form>
+
+<ul>
+{% for message in messages %} <!-- for loop -->
+<li>{{ message }}</li> <!--should match the top-->
+
+{% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'webkiosk/base_template.html' %}
+
+{% block pagetitle %}GrubFood - Food List{% endblock %}
+
+{% block maincontent %}
+<h2>Food List</h2>
+
+<ol>
+    {% for food in foodlist %}
+    <li>{{ food.name }} | Php {{ food.price }} | <a href="{% url 'webkiosk:food-detail' food.id %}">More Info</a> | <a href="{% url 'webkiosk:food-update' food.id %}">Edit</a> | <a href="{% url 'webkiosk:food-delete' food.id %}">Delete</a></li>
+
+    {% endfor %}
+    </ol>
+
+<span>Hello, {{request.user}}</span>
+<span><a href="{% url 'webkiosk:logout' %}">Logout</a></span>
+
+{% endblock %} 

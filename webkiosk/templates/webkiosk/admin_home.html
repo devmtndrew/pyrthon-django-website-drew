@@ -1,0 +1,60 @@
+{%  extends 'webkiosk/main.html' %}
+{% block content %}
+
+<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+                <h2>All Food</h2>
+				<ol>
+                    {% for food in foodlist %}
+                    <li>{{ food.name }} | Php {{ food.price }} | <a href="{% url 'webkiosk:food-detail' food.id %}">More Info</a> | <a href="{% url 'webkiosk:food-update' food.id %}">Edit</a> | <a href="{% url 'webkiosk:food-delete' food.id %}">Delete</a></li>
+                
+                    {% endfor %}
+                    </ol>
+
+                    <a href="{% url 'webkiosk:food-create' %}">Add Food</a>
+
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+                <h2>All Customers</h2>
+                    <ol>
+                        {% for customer in customerlist %}
+                        <li>{{ customer.firstname }} {{ customer.lastname }} | <a href="{% url 'webkiosk:customer-detail' customer.id %}">More Info</a> | <a href="{% url 'webkiosk:customer-update' customer.id %}">Edit</a> | <a href="{% url 'webkiosk:customer-delete' customer.id %}">Delete</a></li></li>
+                    
+                    {% endfor %}
+                    </ol>
+
+                    <a href="{% url 'webkiosk:customer-create' %}">Add Customer</a>
+
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+                <h2>All Orders</h2>
+                    <ol>
+                        {% for order in orderlist %}
+                        <li>{{ order.orderdatetime }} {{ order.paymentmode }} {{ order.quantity }} {{ order.customer }}</li>
+                    
+                    {% endfor %}
+                    </ol>
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

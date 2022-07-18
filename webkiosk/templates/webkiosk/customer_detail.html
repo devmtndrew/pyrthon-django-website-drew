@@ -1,0 +1,13 @@
+{% extends 'webkiosk/base_template.html' %}
+
+{% block pagetitle %} GrubFood - {{ customer.firstname }} {{ customer.lastname }}{% endblock %} <!--customer.name bc customer is the key in context-->
+
+{% block maincontent %}
+<h2>{{ customer.firstname }} {{ customer.lastname }}</h2>
+
+<ul>
+    <li>Name: {{ customer.firstname }} {{ customer.lastname }}</li>
+    <li>Address: {{ customer.address }}, {{ customer.city }} </li> <!-- calling method same as calling attribute-->
+    <!-- have to add  orders later -->
+</ul>
+{% endblock %}

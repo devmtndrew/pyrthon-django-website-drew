@@ -1,0 +1,56 @@
+{%  extends 'webkiosk/main.html' %}
+{% block content %}
+{%  include 'webkiosk/status.html' %}
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Product (Name, Description, Price in PHP)</th>
+					<th>Quantity</th>
+					<th>Payment Mode</th>
+					<th>Date Ordered</th>
+				</tr>
+
+				{% for order in orders %}
+
+				<tr>
+					<td>{{order.food}}</td>
+					<td>{{order.quantity}}</td>
+					<td>{{order.paymentmode}}</td>
+					<td>{{order.orderdatetime}}</td>
+				</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<ul>
+					
+	<p>Firstname</p>{{ user.customer.firstname }}
+	<br>
+	<p>Lastname</p>{{ user.customer.lastname }}
+	<br>
+	<p>Username</p>{{ user.customer.user }}
+	<br>
+	<p>Address</p>{{ user.customer.address }}
+	<br>
+	<p>City</p>{{ user.customer.city }}
+</ul>
+
+
+			</table>
+		</div>
+	</div>
+</div>
+
+
+{% endblock content %}
