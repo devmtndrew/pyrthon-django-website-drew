@@ -1,4 +1,4 @@
-{%  extends 'webkiosk/main.html' %}
+{%  extends 'webkiosk/main_home2.html' %}
 {% block content %}
 {%  include 'webkiosk/status.html' %}
 
@@ -11,6 +11,8 @@
 					<th>Quantity</th>
 					<th>Payment Mode</th>
 					<th>Date Ordered</th>
+					<th>Edit Order</th>
+					<th>Delete Order</th>
 				</tr>
 
 				{% for order in orders %}
@@ -20,6 +22,8 @@
 					<td>{{order.quantity}}</td>
 					<td>{{order.paymentmode}}</td>
 					<td>{{order.orderdatetime}}</td>
+					<td><a href="{% url 'webkiosk:edit-order' order.id%}">Edit</a></li></td>
+					<td><a href="{% url 'webkiosk:delete-order' order.id%}">Delete</a></td>
 				</tr>
 				{% endfor %}
 
@@ -35,15 +39,18 @@
 			<table class="table table-sm">
 				<ul>
 					
-	<p>Firstname</p>{{ user.customer.firstname }}
+	<p><b>First name:</b> {{ user.customer.firstname }}</p>
 	<br>
-	<p>Lastname</p>{{ user.customer.lastname }}
+	<p><b>Last name:</b> {{ user.customer.lastname }}</p>
 	<br>
-	<p>Username</p>{{ user.customer.user }}
+	<p><b>Username:</b> {{ user.customer.user }}</p>
 	<br>
-	<p>Address</p>{{ user.customer.address }}
+	<p><b>Address:</b> {{ user.customer.address }}</p>
 	<br>
-	<p>City</p>{{ user.customer.city }}
+	<p><b>City:</b> {{ user.customer.city }}</p>
+	<br>
+	<p><a href="{% url 'webkiosk:customer-update-2' user.id %}">Edit Profile</a></p>
+
 </ul>
 
 
@@ -51,6 +58,5 @@
 		</div>
 	</div>
 </div>
-
 
 {% endblock content %}

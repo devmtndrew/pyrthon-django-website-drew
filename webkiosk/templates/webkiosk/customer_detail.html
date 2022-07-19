@@ -9,5 +9,16 @@
     <li>Name: {{ customer.firstname }} {{ customer.lastname }}</li>
     <li>Address: {{ customer.address }}, {{ customer.city }} </li> <!-- calling method same as calling attribute-->
     <!-- have to add  orders later -->
+
+    <h3>Orders Information</h3>
+    {% for order in order %}
+			
+                <h4>Order Number: {{ order.id }}</h4>
+                <ul>
+                    <li>Quantity & Food: {{ order.quantity }} {{ order.food.name }} </li>
+                    <li>Date & Time: {{ order.orderdatetime }}</li>
+                    <li>Total: Php {% widthratio order.food.price 1 order.quantity%}</li>
+                </ul>
+	{% endfor %}
 </ul>
 {% endblock %}

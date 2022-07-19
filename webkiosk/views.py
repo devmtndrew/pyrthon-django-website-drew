@@ -6,11 +6,12 @@ from django.contrib.auth.forms import UserCreationForm
 
 from django.contrib.auth import authenticate, login, logout
 
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.models import Group, User, Permission 
+from django.contrib.contenttypes.models import ContentType
 
 from .models import Customer, Food, Order
-from .forms import FoodForm, CreateUserForm, CustomerForm
+from .forms import FoodForm, CreateUserForm, CustomerForm, OrderForm
 from .decorators import unauthenticated_user, allowed_users
 
 # Create your views here.
@@ -135,8 +136,10 @@ def userPage(request):
 	context = {'orders':orders, 'total_orders':total_orders,'customerlist':cl,}
 	return render(request, 'webkiosk/user.html', context)
 
+@login_required(login_url='login')
 def updatecustomer2(request, pk):
-	c = Customer.objects.get(id=pk) # declaring the variable c here to fill up the details
+	current_user = request.user
+	c = Customer.objects.get(user=pk) # declaring the variable c here to fill up the details
 	if request.method == "GET":
 		cf = CustomerForm(instance=c) # putting the details into the form
 	elif request.method == "POST":
@@ -193,9 +196,10 @@ def createcustomer(request):
 
 @allowed_users(allowed_roles=['admin'])
 def detailcustomer(request,pk):
-	c = Customer.objects.get(id=pk)
-	context = {'customer': c}
-	return render(request, "webkiosk/customer_detail.html", context)
+    c = Customer.objects.get(id=pk)
+    o = Order.objects.filter(customer_id=pk)
+    context = {'customer': c, 'order': o}
+    return render(request, "webkiosk/customer_detail.html", context)
 
 @allowed_users(allowed_roles=['admin'])
 def updatecustomer(request, pk):
@@ -220,3 +224,52 @@ def deletecustomer(request, pk):
 	elif request.method == "POST":
 		c.delete()
 		return redirect('webkiosk:customers-list')
+
+@login_required(login_url='webkiosk:login')
+def listfood2(request):
+	fl = Food.objects.all()
+	context = {
+		'foodlist': fl
+	}
+	return render(request, 'webkiosk/food_list2.html', context)
+
+#add order for admin
+@login_required(login_url='login')
+def addorder(request):
+    if request.method == "GET":
+        of = OrderForm()
+    elif request.method == 'POST':
+        of = OrderForm(request.POST)
+        if of.is_valid():
+            of.save()
+        return redirect('webkiosk:admin-home')
+
+    context = {'orderform' : of}
+    return render(request, "webkiosk/order_form.html", context)
+
+#update order
+@login_required(login_url='login')
+def updateorder(request, pk):
+ # declaring the variable c here to fill up the details
+    o = Order.objects.get(id=pk)
+    if request.method == "GET":
+        of = OrderForm(instance=o) # putting the details into the form
+    elif request.method == "POST":
+        of = OrderForm(request.POST, instance = o) # updates instance
+        if of.is_valid():
+            of.save()
+        
+    context = {"orderform": of} #context is the cf bc that's what we wanna pass to the html
+    return render(request, 'webkiosk/order_form.html', context)
+
+#delete order
+@login_required(login_url='login')
+def deleteorder(request,pk):
+    
+    o = Order.objects.get(id=pk)
+    if request.method == 'GET':
+        context = {'order': o} 
+        return render(request, 'webkiosk/order_delete.html', context)
+    elif request.method == "POST":
+        o.delete()
+        return redirect('webkiosk:admin-home')

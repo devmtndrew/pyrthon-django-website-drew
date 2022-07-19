@@ -18,3 +18,8 @@ class CustomerForm(ModelForm):
     class Meta:
         model = Customer
         fields = ['user','firstname','lastname','address','city']
+
+class OrderForm(ModelForm):
+    class Meta:
+        model = Order
+        fields = ['customer','paymentmode','food', 'quantity']

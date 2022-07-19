@@ -23,6 +23,10 @@ urlpatterns = [
     path("customers/<int:pk>", views.detailcustomer, name="customer-detail"),
     path("customers/<int:pk>/edit/", views.updatecustomer, name='customer-update'),
     path('customers/<int:pk>/delete/', views.deletecustomer, name="customer-delete"),
-    path("user/<int:pk>/edit/", views.updatecustomer2, name='customer-update-2'),
+    path("user/<str:pk>/edit/", views.updatecustomer2, name='customer-update-2'),
+    path('foodmenu/', views.listfood2, name='food-list-2'),
+    path('admin/order/add/', views.addorder, name="add-order"),
+    path('admin/order/<int:pk>/edit/', views.updateorder, name="edit-order"),
+    path('admin/order/<int:pk>/delete/',views.deleteorder, name="delete-order")
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
