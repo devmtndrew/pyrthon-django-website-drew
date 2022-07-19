@@ -22,8 +22,8 @@
 					<td>{{order.quantity}}</td>
 					<td>{{order.paymentmode}}</td>
 					<td>{{order.orderdatetime}}</td>
-					<td><a href="{% url 'webkiosk:edit-order' order.id%}">Edit</a></li></td>
-					<td><a href="{% url 'webkiosk:delete-order' order.id%}">Delete</a></td>
+					<td><a href="{% url 'webkiosk:edit-order-2' order.id%}">Edit</a></li></td>
+					<td><a href="{% url 'webkiosk:delete-order-2' order.id%}">Delete</a></td>
 				</tr>
 				{% endfor %}
 

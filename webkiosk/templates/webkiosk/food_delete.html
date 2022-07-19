@@ -10,7 +10,7 @@
 <form method ="post">
     {% csrf_token %}
     <p>Are you sure you want to delete {{ food.name }}?</p>
-    <a href="{% url 'webkiosk:food-list' %}">Cancel</a>
+    <a href="{% url 'webkiosk:admin-home' %}">Cancel</a>
     <input type="submit" value="Yes">
 
 {% endblock %}

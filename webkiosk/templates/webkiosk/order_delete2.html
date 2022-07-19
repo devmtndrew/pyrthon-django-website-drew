@@ -5,12 +5,12 @@
 {% block mainnav %}{% endblock %} <!-- deletes navbar -->
 
 {% block maincontent %}
-<h2>Delete {{ customer.firstname }} {{ customer.lastname }}</h2>
+<h2>Delete Order {{order.id}} </h2>
 
 <form method="post">
     {% csrf_token %}
-    <p>Are you sure you want to delete <b>{{ customer.firstname }} {{customer.lastname}}</b>?</p>
-    <a href="{% url 'webkiosk:admin-home' %}">Cancel</a>
+    <p>Are you sure you want to delete Order {{order.id}} of {{order.quantity}} {{order.food.name}}</b>?</p>
+    <a href="{% url 'webkiosk:user-page' %}">Cancel</a>
     <input type="submit" value="Yes">
 </form>
 {% endblock %}

@@ -18,14 +18,9 @@ body {
 }
 
 footer {
-    margin:50px;
-    background-color: none;
+    margin:10px;
 }
 
 h1 {
     font-size: 50px;
-}
-
-#row {
-    margin:10px;
 }

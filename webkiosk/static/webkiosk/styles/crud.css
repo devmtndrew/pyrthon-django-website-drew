@@ -1,0 +1,35 @@
+body {
+    background-color: antiquewhite;
+    margin: 10px;
+}
+
+.center {
+    width:100%;
+}
+
+header{
+    background-color: antiquewhite;
+    margin:20px;
+    padding: 30px;
+}
+main {
+    background-color: antiquewhite;
+    margin: 20px;
+    padding: 30px;
+}
+
+footer {
+    background-color: antiquewhite;
+    margin:20px;
+    padding: 30px;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+.hello-msg{
+    font-size: 18px;
+    color: antiquewhite;
+    margin-right: 20px;
+  }

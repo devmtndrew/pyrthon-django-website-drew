@@ -234,18 +234,18 @@ def listfood2(request):
 	return render(request, 'webkiosk/food_list2.html', context)
 
 #add order for admin
-@login_required(login_url='login')
+@login_required(login_url='webkiosk:login')
 def addorder(request):
-    if request.method == "GET":
-        of = OrderForm()
-    elif request.method == 'POST':
-        of = OrderForm(request.POST)
-        if of.is_valid():
-            of.save()
-        return redirect('webkiosk:admin-home')
+	if request.method == "GET":
+		of = OrderForm()
+	elif request.method == 'POST':
+		of = OrderForm(request.POST)
+		if of.is_valid():
+			of.save()
+		return redirect('webkiosk:admin-home')
 
-    context = {'orderform' : of}
-    return render(request, "webkiosk/order_form.html", context)
+	context = {'orderform' : of}
+	return render(request, "webkiosk/order_form.html", context)
 
 #update order
 @login_required(login_url='login')
@@ -273,3 +273,58 @@ def deleteorder(request,pk):
     elif request.method == "POST":
         o.delete()
         return redirect('webkiosk:admin-home')
+
+#add order for admin
+@login_required(login_url='webkiosk:login')
+def addorder2(request):
+	if request.method == "GET":
+		of = OrderForm()
+	elif request.method == 'POST':
+		of = OrderForm(request.POST)
+		if of.is_valid():
+			of.save()
+		return redirect('webkiosk:admin-home')
+
+	context = {'orderform' : of}
+	return render(request, "webkiosk/order_form2.html", context)
+
+#update order
+@login_required(login_url='login')
+def updateorder2(request, pk):
+ # declaring the variable c here to fill up the details
+    o = Order.objects.get(id=pk)
+    if request.method == "GET":
+        of = OrderForm(instance=o) # putting the details into the form
+    elif request.method == "POST":
+        of = OrderForm(request.POST, instance = o) # updates instance
+        if of.is_valid():
+            of.save()
+        
+    context = {"orderform": of} #context is the cf bc that's what we wanna pass to the html
+    return render(request, 'webkiosk/order_form2.html', context)
+
+#delete order
+@login_required(login_url='login')
+def deleteorder2(request,pk):
+    
+    o = Order.objects.get(id=pk)
+    if request.method == 'GET':
+        context = {'order': o} 
+        return render(request, 'webkiosk/order_delete2.html', context)
+    elif request.method == "POST":
+        o.delete()
+        return redirect('webkiosk:admin-home')
+
+#add order for admin
+@login_required(login_url='webkiosk:login')
+def addorder2(request):
+	if request.method == "GET":
+		of = OrderForm()
+	elif request.method == 'POST':
+		of = OrderForm(request.POST)
+		if of.is_valid():
+			of.save()
+		return redirect('webkiosk:admin-home')
+
+	context = {'orderform' : of}
+	return render(request, "webkiosk/order_form2.html", context)
