@@ -21,9 +21,6 @@ def index(request):
 def index(request):
 	return render(request, 'webkiosk/welcome.html')
 
-def testview(request):
-	return HttpResponse('<p>This is the test view!</p>')
-
 #login_required restricts pages without login
 
 @login_required(login_url='webkiosk:login')
@@ -47,7 +44,6 @@ def createfood(request):
 	context = { 'form': ff }
 	return render(request, 'webkiosk/food_form.html', context)
 
-# bro i dont fucking know
 def detailfood(request, pk):
 	f = Food.objects.get(id=pk)
 	context = { 'food':f }
@@ -234,33 +230,62 @@ def listfood2(request):
 	return render(request, 'webkiosk/food_list2.html', context)
 
 #add order for admin
-@login_required(login_url='webkiosk:login')
+@login_required(login_url='login')
 def addorder(request):
-	if request.method == "GET":
-		of = OrderForm()
-	elif request.method == 'POST':
-		of = OrderForm(request.POST)
-		if of.is_valid():
-			of.save()
-		return redirect('webkiosk:admin-home')
+    if request.method == "GET":
+        of = OrderForm()
+    elif request.method == 'POST':
+        of = OrderForm(request.POST)
+        if of.is_valid():
+            of.save()
+        return redirect('webkiosk:admin-home')
 
-	context = {'orderform' : of}
-	return render(request, "webkiosk/order_form.html", context)
+    context = {'orderform' : of}
+    return render(request, "webkiosk/order_form.html", context)
+
+@login_required(login_url='login')
+def addorder2(request):
+    if request.method == "GET":
+        of = OrderForm()
+    elif request.method == 'POST':
+        of = OrderForm(request.POST)
+        if of.is_valid():
+            of.save()
+        return redirect('webkiosk:user-page')
+
+    context = {'orderform' : of}
+    return render(request, "webkiosk/order_form2.html", context)
+
 
 #update order
 @login_required(login_url='login')
 def updateorder(request, pk):
- # declaring the variable c here to fill up the details
-    o = Order.objects.get(id=pk)
-    if request.method == "GET":
-        of = OrderForm(instance=o) # putting the details into the form
-    elif request.method == "POST":
-        of = OrderForm(request.POST, instance = o) # updates instance
-        if of.is_valid():
-            of.save()
-        
-    context = {"orderform": of} #context is the cf bc that's what we wanna pass to the html
-    return render(request, 'webkiosk/order_form.html', context)
+	o = Order.objects.get(id=pk)
+	if request.method == 'GET':
+		of = OrderForm(instance=o)
+	elif request.method == 'POST':
+		of = OrderForm(request.POST, instance=o)
+		if of.is_valid():
+			of.save()
+			messages.success(request, 'Order record updated!')
+
+	context = { 'orderform': of }
+	return render(request, 'webkiosk/order_form.html', context)
+
+#update order user
+@login_required(login_url='login')
+def updateorder2(request, pk):
+	o = Order.objects.get(id=pk)
+	if request.method == 'GET':
+		of = OrderForm(instance=o)
+	elif request.method == 'POST':
+		of = OrderForm(request.POST, instance=o)
+		if of.is_valid():
+			of.save()
+			messages.success(request, 'Order record updated!')
+
+	context = { 'orderform': of }
+	return render(request, 'webkiosk/order_form2.html', context)
 
 #delete order
 @login_required(login_url='login')
@@ -274,36 +299,6 @@ def deleteorder(request,pk):
         o.delete()
         return redirect('webkiosk:admin-home')
 
-#add order for admin
-@login_required(login_url='webkiosk:login')
-def addorder2(request):
-	if request.method == "GET":
-		of = OrderForm()
-	elif request.method == 'POST':
-		of = OrderForm(request.POST)
-		if of.is_valid():
-			of.save()
-		return redirect('webkiosk:admin-home')
-
-	context = {'orderform' : of}
-	return render(request, "webkiosk/order_form2.html", context)
-
-#update order
-@login_required(login_url='login')
-def updateorder2(request, pk):
- # declaring the variable c here to fill up the details
-    o = Order.objects.get(id=pk)
-    if request.method == "GET":
-        of = OrderForm(instance=o) # putting the details into the form
-    elif request.method == "POST":
-        of = OrderForm(request.POST, instance = o) # updates instance
-        if of.is_valid():
-            of.save()
-        
-    context = {"orderform": of} #context is the cf bc that's what we wanna pass to the html
-    return render(request, 'webkiosk/order_form2.html', context)
-
-#delete order
 @login_required(login_url='login')
 def deleteorder2(request,pk):
     
@@ -313,18 +308,10 @@ def deleteorder2(request,pk):
         return render(request, 'webkiosk/order_delete2.html', context)
     elif request.method == "POST":
         o.delete()
-        return redirect('webkiosk:admin-home')
+        return redirect('webkiosk:user-page')
 
-#add order for admin
-@login_required(login_url='webkiosk:login')
-def addorder2(request):
-	if request.method == "GET":
-		of = OrderForm()
-	elif request.method == 'POST':
-		of = OrderForm(request.POST)
-		if of.is_valid():
-			of.save()
-		return redirect('webkiosk:admin-home')
-
-	context = {'orderform' : of}
-	return render(request, "webkiosk/order_form2.html", context)
+@login_required(login_url='login')
+def detailorder(request, pk):
+	o = Order.objects.get(id=pk)
+	context = { 'order':o }
+	return render(request, 'webkiosk/order_detail.html', context)

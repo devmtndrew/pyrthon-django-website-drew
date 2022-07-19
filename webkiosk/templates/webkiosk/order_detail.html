@@ -1,0 +1,17 @@
+{% extends 'webkiosk/base_template.html' %}
+
+{% block pagetitle %}GrubFood - {{ order.number }}{% endblock %}
+
+{% block maincontent %}
+<h2>Order {{ order.id  }} </h2>
+
+    <ul>
+        <li><b>Customer:</b> {{order.customer.firstname }} {{order.customer.lastname}} </li>
+        <li><b>Quantity & Food:</b> {{ order.quantity }} {{ order.food.name }} </li>
+        <li><b> Payment Method:</b> {{order.paymentmode}}</li>
+        <li><b>Date & Time:</b> {{ order.orderdatetime }}</li>
+        <li><b>Total:</b> Php {% widthratio order.food.price 1 order.quantity%}</li>
+    </ul>
+
+
+{% endblock %}

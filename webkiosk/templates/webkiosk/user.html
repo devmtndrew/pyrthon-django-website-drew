@@ -1,6 +1,5 @@
 {%  extends 'webkiosk/main_home2.html' %}
 {% block content %}
-{%  include 'webkiosk/status.html' %}
 
 <div class="row">
 	<div class="col-md">
@@ -40,15 +39,13 @@
 				<ul>
 					
 	<p><b>First name:</b> {{ user.customer.firstname }}</p>
-	<br>
 	<p><b>Last name:</b> {{ user.customer.lastname }}</p>
-	<br>
 	<p><b>Username:</b> {{ user.customer.user }}</p>
-	<br>
+
 	<p><b>Address:</b> {{ user.customer.address }}</p>
-	<br>
+	
 	<p><b>City:</b> {{ user.customer.city }}</p>
-	<br>
+	
 	<p><a href="{% url 'webkiosk:customer-update-2' user.id %}">Edit Profile</a></p>
 
 </ul>

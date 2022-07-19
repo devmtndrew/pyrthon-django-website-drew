@@ -1,21 +1,13 @@
 {%  extends 'webkiosk/main_home.html' %}
-{% block content %}
-{%  include 'webkiosk/status.html' %}
+{% load static %}
 
-<div class="row">
-	<div class="col-md">
-		<div class="card card-body">
-			<table class="table table-sm">
-				<tr>
-					<th>Product (Name, Description, Price in PHP)</th>
-					<th>Quantity</th>
-					<th>Payment Mode</th>
-					<th>Date Ordered</th>
-				</tr>
-			</table>
-		</div>
-	</div>
-</div>
+{% block content %}
+
+<section id="content">
+	<h1>Welcome to Jabrews!</h1>
+	<h2>Login through the upper right to continue!</h2>
+	<img class="center" src="{% static 'webkiosk/images/coffeeheader.png' %}">
+</section>
 
 
 {% endblock content %}

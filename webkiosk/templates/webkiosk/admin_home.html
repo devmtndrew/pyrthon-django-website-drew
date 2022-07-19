@@ -13,7 +13,7 @@
                     <li>{{ food.name }} | Php {{ food.price }} | <a href="{% url 'webkiosk:food-detail' food.id %}">More Info</a> | <a href="{% url 'webkiosk:food-update' food.id %}">Edit</a> | <a href="{% url 'webkiosk:food-delete' food.id %}">Delete</a></li>
                 
                     {% endfor %}
-                    </ol>
+                </ol>
 
                     <a href="{% url 'webkiosk:food-create' %}">Add Food</a>
 
@@ -29,7 +29,7 @@
                 <h2>All Customers</h2>
                     <ol>
                         {% for customer in customerlist %}
-                        <li>{{ customer.firstname }} {{ customer.lastname }} | <a href="{% url 'webkiosk:customer-detail' customer.id %}">More Info</a> | <a href="{% url 'webkiosk:customer-update' customer.id %}">Edit</a> | <a href="{% url 'webkiosk:customer-delete' customer.id %}">Delete</a></li>
+                        <li>{{ customer.firstname }} {{ customer.lastname }}, {{customer.city}} | <a href="{% url 'webkiosk:customer-detail' customer.id %}">More Info</a> | <a href="{% url 'webkiosk:customer-update' customer.id %}">Edit</a> | <a href="{% url 'webkiosk:customer-delete' customer.id %}">Delete</a></li>
                     
                     {% endfor %}
                     </ol>
@@ -48,7 +48,7 @@
                 <h2>All Orders</h2>
                     <ol>
                         {% for order in orderlist %}
-                        <li>{{ order.customer.firstname }} {{ order.customer.lastname }}'s {{ order.quantity }} orders of {{order.food.name}} ({{ order.orderdatetime }} {{ order.paymentmode }}) | <a href="{% url 'webkiosk:edit-order' order.id%}">Edit</a> | <a href="{% url 'webkiosk:delete-order' order.id%}">Delete</a></li>
+                        <li>{{ order.customer.firstname }} {{ order.customer.lastname }} ({{ order.orderdatetime }}) | <a href="{% url 'webkiosk:detail-order' order.id %}">More Info</a> | <a href="{% url 'webkiosk:edit-order' order.id%}">Edit</a> | <a href="{% url 'webkiosk:delete-order' order.id%}">Delete</a></li>
                     
                     {% endfor %}
                     </ol>
